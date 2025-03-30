@@ -1,0 +1,38 @@
+FUNCTION_BLOCK recomendacion
+
+VAR_INPUT
+    budget : REAL;
+    rating : REAL;
+END_VAR
+
+VAR_OUTPUT
+    recommendation : REAL;
+END_VAR
+
+FUZZIFY budget
+    TERM budget_low := (0, 1) (500, 0);
+    TERM budget_medium := (400, 0) (1000, 1) (1600, 0);
+    TERM budget_high := (1500, 0) (3000, 1);
+END_FUZZIFY
+
+FUZZIFY rating
+    TERM rating_bad := (0, 1) (3, 0);
+    TERM rating_regular := (2, 0) (5, 1) (8, 0);
+    TERM rating_good := (7, 0) (10, 1);
+END_FUZZIFY
+
+DEFUZZIFY recommendation
+    TERM rec_low := (0, 1) (3, 0);
+    TERM rec_medium := (2, 0) (5, 1) (8, 0);
+    TERM rec_high := (7, 0) (10, 1);
+    METHOD : COG;
+END_DEFUZZIFY
+
+RULEBLOCK Reglas
+    RULE 1: IF budget IS budget_low AND rating IS rating_bad THEN recommendation IS rec_low;
+    RULE 2: IF budget IS budget_low AND rating IS rating_regular THEN recommendation IS rec_medium;
+    RULE 3: IF budget IS budget_medium AND rating IS rating_good THEN recommendation IS rec_high;
+    RULE 4: IF budget IS budget_high THEN recommendation IS rec_high;
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
