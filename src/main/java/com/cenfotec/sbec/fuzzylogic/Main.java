@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Main {
     public static void main(String[] args) {
-        
+
         log.info("Starting Fuzzy Logic System...");
         Scanner scanner = new Scanner(System.in);
 
@@ -16,30 +16,29 @@ public class Main {
 
         log.info("Fuzzy Logic System Initialized.");
 
-        var continueLoop = true;
+        boolean continueLoop = true;
 
-        while(continueLoop == true) {
+        while (continueLoop) {
             // Prompt the user for input values.
-            log.info("Enter the budget (>0): ");
-            int budget = scanner.nextInt();
-            log.info("Enter the rating (0-10): ");
-            int rating = scanner.nextInt();
+            log.info("Enter the temperature in Celsius (e.g. 25): ");
+            int temperature = scanner.nextInt();
 
-            // Get the recommendation based on the input values.
-            double recommendation = fuzzyLogicSystem.getRecommendation(budget, rating);
+            log.info("Enter the humidity percentage (e.g. 60): ");
+            int humidity = scanner.nextInt();
 
-            log.info("The recommendation score of a hotel with budget {} and rating of {} is: {} out of 10", 
-            budget, rating, recommendation);
+            // Get the fan speed recommendation based on the input values.
+            double fanSpeed = fuzzyLogicSystem.getRecommendation(temperature, humidity);
+
+            log.info("The recommended fan speed for temperature {}C and humidity {}% is: {} (0 to 10 scale)", 
+                    temperature, humidity, fanSpeed);
 
             log.info("Do you want to continue? (y/n)");
             String response = scanner.next();
-            if(response.equalsIgnoreCase("n")) {
+            if (response.equalsIgnoreCase("n")) {
                 continueLoop = false;
                 scanner.close();
                 log.info("Exiting...");
             }
         }
-        
     }
-
-}
+} 

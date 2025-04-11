@@ -1,0 +1,44 @@
+FUNCTION_BLOCK air_conditioning
+
+VAR_INPUT
+    temperature : REAL;  // Temperatura ambiente (°C)
+    humidity : REAL;     // Humedad relativa (%)
+END_VAR
+
+VAR_OUTPUT
+    fan_speed : REAL;    // Velocidad del ventilador (0-10)
+END_VAR
+
+// Definición de conjuntos difusos para temperatura
+FUZZIFY temperature
+    TERM cold := (0, 1) (18, 1) (22, 0);
+    TERM warm := (20, 0) (25, 1) (30, 0);
+    TERM hot := (28, 0) (35, 1) (45, 1);
+END_FUZZIFY
+
+// Definición de conjuntos difusos para humedad
+FUZZIFY humidity
+    TERM low := (0, 1) (30, 1) (50, 0);
+    TERM medium := (40, 0) (60, 1) (80, 0);
+    TERM high := (70, 0) (90, 1) (100, 1);
+END_FUZZIFY
+
+// Definición de conjuntos difusos para la salida: velocidad del ventilador
+DEFUZZIFY fan_speed
+    TERM low := (0, 1) (3, 0);
+    TERM medium := (2, 0) (5, 1) (8, 0);
+    TERM high := (7, 0) (10, 1);
+    METHOD : COG; // Centro de Gravedad
+END_DEFUZZIFY
+
+// Reglas difusas para el sistema de control
+RULEBLOCK Rules
+    RULE 1: IF temperature IS cold AND humidity IS low THEN fan_speed IS low;
+    RULE 2: IF temperature IS warm AND humidity IS medium THEN fan_speed IS medium;
+    RULE 3: IF temperature IS hot AND humidity IS high THEN fan_speed IS high;
+    RULE 4: IF temperature IS hot AND humidity IS medium THEN fan_speed IS high;
+    RULE 5: IF temperature IS warm AND humidity IS high THEN fan_speed IS medium;
+    RULE 6: IF temperature IS cold AND humidity IS high THEN fan_speed IS medium;
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
