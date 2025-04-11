@@ -29,7 +29,7 @@ public class Main {
             // Get the fan speed recommendation based on the input values.
             double fanSpeed = fuzzyLogicSystem.getRecommendation(temperature, humidity);
 
-            log.info("The recommended fan speed for temperature {}C and humidity {}% is: {} (0 to 10 scale)", 
+            log.info("The risk for temperature {}C and humidity {}% is: {} (0 to 10 scale)", 
                     temperature, humidity, fanSpeed);
 
             log.info("Do you want to continue? (y/n)");
