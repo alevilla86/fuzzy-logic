@@ -5,14 +5,14 @@ import java.util.Scanner;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class Main {
+public class TemperatureRiskMain {
     public static void main(String[] args) {
 
         log.info("Starting Fuzzy Logic System...");
         Scanner scanner = new Scanner(System.in);
 
         // Create an instance of the fuzzy logic system.
-        FuzzyLogicSystem fuzzyLogicSystem = new FuzzyLogicSystem();
+        FuzzyLogicSystemRisk fuzzyLogicSystem = new FuzzyLogicSystemRisk();
 
         log.info("Fuzzy Logic System Initialized.");
 

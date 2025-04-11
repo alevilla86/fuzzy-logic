@@ -4,13 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 import net.sourceforge.jFuzzyLogic.FIS;
 
 @Slf4j
-public class FuzzyLogicSystem {
+public class FuzzyLogicSystemRisk {
 
-    private static final String RULES_FILE = "rules2.fcl";
+    private static final String RULES_FILE = "risk_rules.fcl";
 
     private FIS fis;
 
-    public FuzzyLogicSystem() {
+    public FuzzyLogicSystemRisk() {
         // Load the fuzzy logic rules.
         loadRules();
     }
@@ -30,7 +30,7 @@ public class FuzzyLogicSystem {
     }
 
     private void loadRules() {
-        String fileName = FuzzyLogicSystem.class.getClassLoader().getResource(RULES_FILE).getPath();
+        String fileName = FuzzyLogicSystemRisk.class.getClassLoader().getResource(RULES_FILE).getPath();
         fis = FIS.load(fileName, false);
         if (fis == null) {
             log.error("Error loading the fuzzy logic rules file.");

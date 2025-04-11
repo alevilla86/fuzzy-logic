@@ -155,6 +155,7 @@ RULEBLOCK Reglas
     RULE 2: IF budget IS budget_low AND rating IS rating_regular THEN recommendation IS rec_medium;
     RULE 3: IF budget IS budget_medium AND rating IS rating_good THEN recommendation IS rec_high;
     RULE 4: IF budget IS budget_high THEN recommendation IS rec_high;
+    RULE 5: IF budget IS budget_medium AND rating IS rating_regular THEN recommendation IS rec_medium;
 END_RULEBLOCK
 ```
 
@@ -165,3 +166,5 @@ END_RULEBLOCK
 -   **`RULE 3`**: Si el **presupuesto** es medio (**`budget_medium`**) y la **valoración** es buena (**`rating_good`**), entonces la **recomendación** será alta (**`rec_high`**).
     
 -   **`RULE 4`**: Si el **presupuesto** es alto (**`budget_high`**), entonces la **recomendación** será alta (**`rec_high`**), sin importar la valoración.
+
+-   **`RULE 5`**: Si el **presupuesto** es medio (**`budget_medium`**) y la **valoración** es regular (**`rating_regular`**), entonces la **recomendación** será media (**`rec_medium`**).

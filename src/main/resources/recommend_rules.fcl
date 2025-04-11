@@ -33,6 +33,7 @@ RULEBLOCK Reglas
     RULE 2: IF budget IS budget_low AND rating IS rating_regular THEN recommendation IS rec_medium;
     RULE 3: IF budget IS budget_medium AND rating IS rating_good THEN recommendation IS rec_high;
     RULE 4: IF budget IS budget_high THEN recommendation IS rec_high;
+    RULE 5: IF budget IS budget_medium AND rating IS rating_regular THEN recommendation IS rec_medium;
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK
