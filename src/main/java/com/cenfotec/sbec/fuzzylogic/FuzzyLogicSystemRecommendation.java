@@ -2,6 +2,7 @@ package com.cenfotec.sbec.fuzzylogic;
 
 import lombok.extern.slf4j.Slf4j;
 import net.sourceforge.jFuzzyLogic.FIS;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.InputStream;
@@ -9,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
 @Slf4j
+@Service
 public class FuzzyLogicSystemRecommendation {
 
     private static final String RULES_FILE = "recommend_rules.fcl";
@@ -41,7 +43,7 @@ public class FuzzyLogicSystemRecommendation {
             java.net.URL resource = FuzzyLogicSystemRecommendation.class.getClassLoader().getResource(RULES_FILE);
             if (resource == null) {
                 log.error("Rules file not found: {}", RULES_FILE);
-                return;
+                throw new IllegalStateException("Rules file not found: " + RULES_FILE);
             }
             
             String protocol = resource.getProtocol();
@@ -52,7 +54,7 @@ public class FuzzyLogicSystemRecommendation {
                 InputStream inputStream = FuzzyLogicSystemRecommendation.class.getClassLoader().getResourceAsStream(RULES_FILE);
                 if (inputStream == null) {
                     log.error("Cannot read rules file from JAR: {}", RULES_FILE);
-                    return;
+                    throw new IllegalStateException("Cannot read rules file from JAR: " + RULES_FILE);
                 }
                 
                 File tempFile = File.createTempFile("recommend_rules", ".fcl");
@@ -69,11 +71,12 @@ public class FuzzyLogicSystemRecommendation {
             fis = FIS.load(fileName, false);
             if (fis == null) {
                 log.error("Error loading the fuzzy logic rules file.");
-                return;
+                throw new IllegalStateException("Error loading the fuzzy logic rules file.");
             }
             log.info("Successfully loaded fuzzy logic rules from: {}", fileName);
         } catch (Exception e) {
             log.error("Error loading the fuzzy logic rules file: {}", e.getMessage(), e);
+            throw new IllegalStateException("Failed to load fuzzy logic rules", e);
         }
     }
 
