@@ -1,5 +1,28 @@
 # Fuzzy Logic en Java
 
+## REST API
+
+Este proyecto ahora incluye endpoints REST para acceder a los sistemas de lógica difusa vía HTTP. 
+
+Para más información sobre cómo usar la API REST, consulta [API.md](API.md).
+
+**Inicio rápido:**
+```bash
+# Construir el proyecto
+mvn clean package
+
+# Ejecutar la aplicación
+java -jar target/fuzzy-logic.jar
+
+# La API estará disponible en http://localhost:8080
+```
+
+**Endpoints disponibles:**
+- `POST /api/hotel/recommend` - Recomendación de hotel basada en presupuesto y valoración
+- `POST /api/temperature/risk` - Evaluación de riesgo basada en temperatura y humedad
+
+---
+
 ## ¿Cómo interpretar el archivo de reglas?
 
 ### **Estructura del archivo FCL**:
