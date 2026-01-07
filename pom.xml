@@ -7,11 +7,12 @@
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <exec.mainClass>com.cenfotec.sbec.fuzzylogic.Main</exec.mainClass>
-        <java.version>21</java.version>
+        <exec.mainClass>com.cenfotec.sbec.fuzzylogic.Application</exec.mainClass>
+        <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.compiler.release>${java.version}</maven.compiler.release>
+        <spring.boot.version>3.2.1</spring.boot.version>
     </properties>
     
     <dependencies>
@@ -21,6 +22,12 @@
             <version>3.3</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/jFuzzyLogic.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring.boot.version}</version>
         </dependency>
 
         <dependency>
@@ -61,7 +68,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.10.1</version>
                 <configuration>
-                    <release>21</release>
+                    <release>17</release>
                 </configuration>
             </plugin>
             <!-- Maven Jar Plugin -->
@@ -72,7 +79,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.cenfotec.sbec.fuzzylogic.Main</mainClass>
+                            <mainClass>com.cenfotec.sbec.fuzzylogic.Application</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -92,10 +99,25 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.cenfotec.sbec.fuzzylogic.Main</mainClass>
+                            <mainClass>com.cenfotec.sbec.fuzzylogic.Application</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
